@@ -1,23 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import UserCard from "../components/UserCard";
+import { Grid, Typography } from "@mui/material";
 
-function SavedUsers() {
-  const savedUsers = JSON.parse(localStorage.getItem("savedUsers")) || [];
+const SavedUsers = () => {
+  const [savedUsers, setSavedUsers] = useState([]);
+
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("savedUsers")) || [];
+    setSavedUsers(saved);
+  }, []);
+
+  const deleteUser = (index) => {
+    const updatedSavedUsers = savedUsers.filter((_, i) => i !== index);
+    setSavedUsers(updatedSavedUsers);
+    localStorage.setItem("savedUsers", JSON.stringify(updatedSavedUsers));
+  };
 
   return (
-    <div className="container">
-      <h1>Saved Users</h1>
-      <div className="user-list">
+    <div>
+      <Typography variant="h4" gutterBottom>
+        Saved Users
+      </Typography>
+      <Grid container spacing={3}>
         {savedUsers.map((user, index) => (
-          <div key={index} className="user-card">
-            <img src={user.picture.large} alt="Profile" />
-            <h3>{user.name.first} {user.name.last}</h3>
-            <p>Email: {user.email}</p>
-            <p>Location: {user.location.city}, {user.location.country}</p>
-          </div>
+          <Grid item xs={12} sm={6} md={4} key={index}>
+            <UserCard user={user} onDelete={() => deleteUser(index)} isSaved />
+          </Grid>
         ))}
-      </div>
+      </Grid>
     </div>
   );
-}
+};
 
 export default SavedUsers;
