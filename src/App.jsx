@@ -6,7 +6,7 @@ import SavedUsers from "./components/SavedUsers";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/weather">
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
