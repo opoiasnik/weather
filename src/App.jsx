@@ -1,12 +1,17 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
 import Home from "./components/Home";
 import SavedUsers from "./components/SavedUsers";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/weather">
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
