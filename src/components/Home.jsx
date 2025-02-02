@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import UserCard from "../components/UserCard";
 import { Grid, Button, Typography } from "@mui/material";
@@ -15,7 +15,8 @@ const Home = () => {
 
   const loadUsers = async () => {
     const response = await axios.get("https://randomuser.me/api/?results=5");
-    setUsers(response.data.results);
+    
+    setUsers((prevUsers) => [...prevUsers, ...response.data.results]);
   };
 
   const saveUser = (user) => {
